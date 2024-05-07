@@ -31,6 +31,7 @@
 }
 
 .home-navbar .navbar-container .menu .links {
+margin-right: 400px;
   min-width: 700px;
   display: flex;
   flex-direction: row;
@@ -39,9 +40,14 @@
 }
 
 .home-navbar .navbar-container .menu .links .login-button {
-  background: #fa1b02;
-  color: #f8f8ff;
+  background: #f7cdcdf4;
+  color: #060606;
 }
+.home-navbar .navbar-container .menu .links .signup-button {
+    margin-left: 150px;
+    background: #fa1b02;
+    color: #f8f8ff;
+  }
 
 .home-navbar .navbar-container .menu .user-avatar {
   width: 50px;
@@ -77,3 +83,37 @@
 .home-navbar div.hover-line:after {
   transform-origin: 0% 50%;
 }
+
+.home-navbar .navbar-container .header-frame .detail {
+    width: 510px;
+    display: flex;
+    flex-direction: column;
+    
+    }
+    
+    .home-navbar .navbar-container .detail .head-main-txt{
+        width: 500px;
+        height: 150px;
+        margin-top: 170px;
+        font-family: "Roboto Serif";
+        font-size: 50px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: -0.75px;
+        color:#060606;
+    }
+    
+    .home-navbar .navbar-container .detail .wel-txt{
+        width: 710px;
+        height: 42px;
+        margin-top: 70px;
+
+        font-family: "Roboto Serif";
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 450;
+        line-height: normal;
+        letter-spacing: -0.54px;
+        color:#050505;
+    }
