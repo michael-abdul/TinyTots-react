@@ -1,17 +1,16 @@
 import React from 'react';
 
 import {  Route, Switch, useLocation } from 'react-router-dom';
-import { HomePage } from './app/screens/homePage';
-import { ProductsPage } from './app/screens/productsPage';
-import { OrdersPage } from './app/screens/ordersPage';
-import { UserPage } from './app/screens/userPage';
-import { OtherNavbar } from './app/components/headers/OtherNavbar';
-import { HomeNavbar } from './app/components/headers/HomeNavbar';
-import { Footer } from './app/components/footer';
+import { HomePage} from './screens/homePage';
+import { ProductsPage } from './screens/productsPage';
+import { OrdersPage } from './screens/ordersPage';
+import { UserPage } from './screens/userPage';
+import { OtherNavbar } from './components/headers/OtherNavbar';
+import { HomeNavbar } from './components/headers/HomeNavbar';
+import { Footer } from './components/footer';
 import '../css/app.css';
-
-
-
+import "../css/navbar.css";
+import { HelpPage } from './screens/helpPage';
 function App() {
   const location = useLocation();
   return (
@@ -27,6 +26,9 @@ function App() {
     </Route>
     <Route path="/member-page">
       <UserPage />
+    </Route>
+    <Route path="/help">
+      <HelpPage />
     </Route>
     <Route path="/">
       <HomePage />
