@@ -8,10 +8,10 @@ import { ProductsPage } from './screens/productsPage';
 import { OrdersPage } from './screens/ordersPage';
 import { UserPage } from './screens/userPage';
 import { HelpPage } from './screens/helpPage';
-import { HomePage } from './screens/homePage';
 import '../css/app.css';
 import "../css/navbar.css";
 import "../css/footer.css";
+import HomePage from './screens/homePage';
 function App() {
   const location = useLocation();
   return (
