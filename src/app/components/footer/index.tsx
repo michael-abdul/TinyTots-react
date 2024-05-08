@@ -9,6 +9,7 @@ const Footers = styled.div`
   display: flex;
   background: #ffffff;
   background-size: cover;
+  border: 1px solid
 `;
 
 export default function Footer() {

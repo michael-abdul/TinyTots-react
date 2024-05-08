@@ -67,7 +67,7 @@ export default function HomeNavbar() {
         </Stack> 
         <Stack className={"detail"}>
           <Box className={"head-main-txt"}>Discover a world of fun with our top quality babytoys</Box>
-          <Box className={"wel-txt"}>Explore toys by age, brand, or special offers!</Box>
+          <Box className={"wel-txt"}>Find the perfect toys for your little ones!</Box>
         </Stack>
       </Container>
     </div>
