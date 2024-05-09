@@ -59,7 +59,7 @@ margin-right: 400px;
   text-decoration: none;
 }
 .home-navbar .hover-line a {
-  color: #040404;
+  color: #000000;
   z-index: 100;
 }
 
@@ -117,6 +117,93 @@ margin-right: 400px;
         letter-spacing: -0.54px;
         color:#050505;
     }
+
+
+
+
+
+
+
+.other-navbar{
+  width: auto;
+  height:500px;
+  display: flex;
+  background: url("/public/img/banner.svg");
+  background-size: cover;
+
+}
+
+.other-navbar .navbar-container{
+  margin-top: 55px;
+  
+}
+
+.other-navbar .navbar-container .menu{
+height: 50px;  
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+}
+
+.other-navbar .navbar-container .menu .brand-logo {
+  width: 125px;
+  height: 30px;
+}
+
+.other-navbar .navbar-container .menu .links{
+ min-width: 700px;
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+ align-items: center;
+ margin-right: 400px;
+}
+
+.other-navbar .navbar-container .menu .links .login-button{
+ background: #f7cdcdf4;
+ color: #000000;
+}
+
+.other-navbar .navbar-container .menu .user-avatar {
+width: 50px;
+height: 50px;
+border-radius: 24px;
+}
+
+
+.other-navbar a{
+  text-decoration: none;
+
+}
+.other-navbar .hover-line a {
+  color: #000000;
+  z-index: 100;
+}
+
+.other-navbar .underline {
+  display: block ;
+  content: "";
+  border-bottom: solid 2px #000000;
+}
+
+.other-navbar .hover-line:after {
+  display: block;
+  content: "";
+  border-bottom: solid 2px  #000000;
+  transform: scale(0);
+  transition: transform 250ms ease-in-out;
+}
+.other-navbar .hover-line:hover:after {
+  transform: scaleX(1);
+}
+
+.other-navbar div.hover-line:after {
+  transform-origin: 0% 50%;
+}
+
+
+
 
 
 

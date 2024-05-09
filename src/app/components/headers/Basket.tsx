@@ -82,7 +82,7 @@ export default function Basket() {
                 <div className={"cancel-btn"}>
                   <CancelIcon color={"primary"} />
                 </div>
-                <img src={"/img/fresh.webp"} className={"product-img"} />
+                <img src={"/img/puzzle.jpg"} className={"product-img"} />
                 <span className={"product-name"}>Puzzles</span>
                 <p className={"product-price"}>$10 x 1</p>
                 <Box sx={{ minWidth: 120 }}>

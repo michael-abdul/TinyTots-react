@@ -4,7 +4,7 @@ import { Link, Route, Switch, useLocation } from 'react-router-dom';
 import  OtherNavbar  from './components/headers/OtherNavbar';
 import HomeNavbar  from './components/headers/HomeNavbar';
 import Footer  from './components/footer';
-import { ProductsPage } from './screens/productsPage';
+import ProductsPage from './screens/productsPage';
 import { OrdersPage } from './screens/ordersPage';
 import { UserPage } from './screens/userPage';
 import { HelpPage } from './screens/helpPage';
