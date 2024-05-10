@@ -55,18 +55,27 @@ export default function Products() {
             <div className={"category-main"}>
               <Button variant={"contained"} color={"secondary"}>
                 Baby playmats
+                <img src= "/icons/preschool.svg"  />
               </Button>
               <Button variant={"contained"} color={"secondary"}>
                 Baby teethers
+                <img src= "/icons/teethe.svg"  />
+
               </Button>
               <Button variant={"contained"} color={"secondary"}>
                 Learning toys
+                <img src= "/icons/learn.svg"  />
+
               </Button>
               <Button variant={"contained"} color={"secondary"}>
-                soft&plush toys
+                Soft & Plush toys
+                <img src= "/icons/plush.svg"  />
+
               </Button>
               <Button variant={"contained"} color={"primary"}>
-                music &sound toys
+                Music & Sound toys
+                <img src= "/icons/todler.svg"  />
+
               </Button>
             </div>
           </Stack>
