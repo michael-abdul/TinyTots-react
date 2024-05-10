@@ -217,7 +217,7 @@ border-radius: 24px;
   display: flex;
   flex-direction: column;
   background: #f8f8ff;
-  border-radius: 16px;
+  border-radius: 24px;
 }
 
 .basket-frame .all-check-box {
@@ -229,6 +229,7 @@ border-radius: 24px;
   align-items: center;
   background: #ff0000;
   border-width: 1px 0px;
+  border-radius: 24px;
   border-style: solid;
   border-color: #343434;
   color: #f8f8ff;
