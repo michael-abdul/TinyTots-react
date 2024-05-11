@@ -18,21 +18,21 @@ const actionDispatch = (dispatch: Dispatch) => ({
 export default function HomePage() {
   const { setTrendingProducts } = actionDispatch(useDispatch());
   useEffect(() => {
-  const product = new ProductService();
-  product.getProducts({
-    page:1,
-    limit:4,
-    order:"createdAt",
-    productCollection: ProductCollection.TEETHERS,
-  })
-  .then((data)=> {
-    console.log("data passed here", data);
-setTrendingProducts(data);
-  })
-  .catch((err)=> console.log(err));
-  
-  }, [])
-  
+    const product = new ProductService();
+    product
+      .getProducts({
+        page: 1,
+        limit: 4,
+        order: "createdAt",
+        productCollection: ProductCollection.TEETHERS,
+      })
+      .then((data) => {
+        console.log("data passed here", data);
+        setTrendingProducts(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div className={"homepage"}>
       <Events />

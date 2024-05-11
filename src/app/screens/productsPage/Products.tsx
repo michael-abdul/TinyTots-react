@@ -8,6 +8,22 @@ import Badge from "@mui/material/Badge";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
+import { Dispatch } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
+import { setProducts } from "./slice";
+import { Product } from "../../../lib/types/product";
+import { createSelector } from "reselect";
+import { retrieveProducts } from "./selector";
+
+/** REDUX SLICE & SELECTOR **/
+const actionDispatch = (dispatch: Dispatch) => ({
+  setProducts: (data: Product[]) => dispatch(setProducts(data)),
+});
+
+const productsRetriever = createSelector(retrieveProducts, (products) => ({
+  products,
+}));
+
 const products = [
   { productName: "Teddy", imagePath: "/img/Image1.svg" },
   { productName: "puzzle", imagePath: "/img/Image2.svg" },
@@ -19,8 +35,6 @@ const products = [
   { productName: "teethers", imagePath: "/img/teethers.webp" },
   { productName: "learning games", imagePath: "/img/Image5.svg" },
   { productName: "softPlush", imagePath: "/img/softPlush.jpeg" },
-
-
 ];
 
 export default function Products() {
@@ -55,27 +69,23 @@ export default function Products() {
             <div className={"category-main"}>
               <Button variant={"contained"} color={"secondary"}>
                 Baby playmats
-                <img src= "/icons/preschool.svg"  />
+                <img src="/icons/preschool.svg" />
               </Button>
               <Button variant={"contained"} color={"secondary"}>
                 Baby teethers
-                <img src= "/icons/teethe.svg"  />
-
+                <img src="/icons/teethe.svg" />
               </Button>
               <Button variant={"contained"} color={"secondary"}>
                 Learning toys
-                <img src= "/icons/learn.svg"  />
-
+                <img src="/icons/learn.svg" />
               </Button>
               <Button variant={"contained"} color={"secondary"}>
                 Soft & Plush toys
-                <img src= "/icons/plush.svg"  />
-
+                <img src="/icons/plush.svg" />
               </Button>
               <Button variant={"contained"} color={"primary"}>
                 Music & Sound toys
-                <img src= "/icons/todler.svg"  />
-
+                <img src="/icons/todler.svg" />
               </Button>
             </div>
           </Stack>
@@ -206,8 +216,7 @@ export default function Products() {
                 Tips for Encouraging Baby's Development
               </Box>
               <Box className="review-text">
-              Discover ways to support your baby's growth and learning
-
+                Discover ways to support your baby's growth and learning
               </Box>
               <img src="/icons/default-user.svg" className="review-icon" />
             </Stack>
@@ -215,9 +224,11 @@ export default function Products() {
               <Box display={"flex"} justifyContent={"center"}>
                 <img src={"/img/baby3.svg"} className={"review-img"} />
               </Box>
-              <Box className="review-txt">Tips for Creating a Stimulating Play Environment</Box>
+              <Box className="review-txt">
+                Tips for Creating a Stimulating Play Environment
+              </Box>
               <Box className="review-text">
-              Find out how to set up a play area that promotes development',
+                Find out how to set up a play area that promotes development',
               </Box>
               <img src="/icons/default-user.svg" className="review-icon" />
             </Stack>
