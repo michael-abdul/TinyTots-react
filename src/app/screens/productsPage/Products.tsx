@@ -14,6 +14,11 @@ import { setProducts } from "./slice";
 import { Product } from "../../../lib/types/product";
 import { createSelector } from "reselect";
 import { retrieveProducts } from "./selector";
+import { useEffect } from "react";
+import ProductService from "../../services/ProductService";
+import { ProductCollection } from "../../../lib/enums/product.enum";
+import { serverApi } from "../../../lib/types/config";
+
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -24,20 +29,25 @@ const productsRetriever = createSelector(retrieveProducts, (products) => ({
   products,
 }));
 
-const products = [
-  { productName: "Teddy", imagePath: "/img/Image1.svg" },
-  { productName: "puzzle", imagePath: "/img/Image2.svg" },
-  { productName: "familygames", imagePath: "/img/Image3.svg" },
-  { productName: "teethers", imagePath: "/img/Image4.svg" },
-  { productName: "learning games", imagePath: "/img/Image5.svg" },
-  { productName: "puzzle", imagePath: "/img/puzzle.jpg" },
-  { productName: "softPlush", imagePath: "/img/softPlush.jpeg" },
-  { productName: "teethers", imagePath: "/img/teethers.webp" },
-  { productName: "learning games", imagePath: "/img/Image5.svg" },
-  { productName: "softPlush", imagePath: "/img/softPlush.jpeg" },
-];
+
 
 export default function Products() {
+  const { setProducts } = actionDispatch(useDispatch());
+  const { products } = useSelector(productsRetriever);
+  useEffect(() => {
+    const product = new ProductService();
+    product
+      .getProducts({
+        page: 1,
+        limit: 10,
+        order: "createdAt",
+        productCollection: ProductCollection.TEETHERS,
+        search: "",
+      })
+      .then((data) => setProducts(data))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div className={"products"}>
       <Container>
@@ -127,17 +137,18 @@ export default function Products() {
         <Stack className={"list-category-section"}>
           <Stack className={"product-wrapper"}>
             {products.length !== 0 ? (
-              products.map((product, index) => {
+              products.map((product:Product) => {
+                const imagePath = `${serverApi}/${product.productImages[0]}`;
                 return (
-                  <Stack key={index} className={"product-card"}>
+                  <Stack key={product._id} className={"product-card"}>
                     <Stack
                       className={"product-img"}
-                      sx={{ backgroundImage: `url(${product.imagePath})` }}
+                      sx={{ backgroundImage: `url(${imagePath})` }}
                     >
                       <Button className={"view-btn"} sx={{ right: "5px" }}>
-                        <Badge badgeContent={20} color="secondary">
+                        <Badge badgeContent={product.productViews} color="secondary">
                           <RemoveRedEyeIcon
-                            sx={{ color: 20 ? "gray" : "white" }}
+                            sx={{ color: product.productViews === 0? "gray" : "white" }}
                           />
                         </Badge>
                       </Button>
@@ -149,7 +160,7 @@ export default function Products() {
 
                       <div className={"product-desc-text"}>
                         <MonetizationOnIcon />
-                        {12}
+                        {product.productPrice}
                       </div>
                       <Button className={"shop-btn"}>
                         <div style={{ display: "flex" }}> Add to cart</div>
