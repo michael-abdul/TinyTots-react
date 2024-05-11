@@ -160,7 +160,7 @@
   flex-wrap: wrap;
 }
 
-.products .product-wrapper .no-data {
+.products .product-wrapper .data-no{
   width: 100%;
   display: flex;
   justify-content: center;

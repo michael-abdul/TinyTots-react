@@ -8,26 +8,37 @@ import { CssVarsProvider } from "@mui/joy/styles";
 import CardOverflow from "@mui/joy/CardOverflow";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { Product } from "../../../lib/types/product";
+import { retrieveTrendingProducts } from "./selector";
+import { serverApi } from "../../../lib/types/config";
 
-const list = [
-  { productName: "LearningToy", imagePath: "/img/learning.webp" },
-  { productName: "Puzzle", imagePath: "/img/puzzle.jpg" },
-  { productName: "CuteHorse", imagePath: "/img/softPlush.jpeg" },
-  { productName: "teether", imagePath: "/img/teethers.webp" },
-];
-export default function trendingProducts() {
+
+const trendingProductsRetriever = createSelector(
+  retrieveTrendingProducts,
+  (trendingProducts) => ({trendingProducts})
+);
+
+export default function TrendingProducts() {
+  const { trendingProducts } = useSelector(trendingProductsRetriever);
+
+  console.log("trendingProducts", trendingProducts);
   return (
     <div className="popular-dishes-frame ">
       <Container>
         <Stack className="popular-section">
           <Box className="category-title">Trending Products</Box>
           <Stack className="cards-frame">
-            {list.map((ele, index) => {
+          {trendingProducts.length !== 0 ? (
+              trendingProducts.map((product: Product) => {
+                const imagePath = `${serverApi}/${product.productImages[0]}`;
+
               return (
-                <CssVarsProvider key={index}>
+                <CssVarsProvider key={product._id}>
                   <Card className={"card"}>
                     <CardCover>
-                      <img src={ele.imagePath} alt="" />
+                      <img src={imagePath} alt="" />
                     </CardCover>
                     <CardCover className={"card-cover"} />
                     <CardContent sx={{ justifyContent: "flex-end" }}>
@@ -41,7 +52,7 @@ export default function trendingProducts() {
                           textColor="#fff"
                           mb={1}
                         >
-                          {ele.productName}
+                          {product.productName}
                         </Typography>
                         <Typography
                           sx={{
@@ -51,7 +62,7 @@ export default function trendingProducts() {
                             display: "flex",
                           }}
                         >
-                          20
+                          {product.productViews}
                           <VisibilityIcon
                             sx={{ fontSize: 25, marginLeft: "5px" }}
                           />
@@ -72,16 +83,22 @@ export default function trendingProducts() {
                         startDecorator={<DescriptionOutlinedIcon />}
                         textColor="neutral. 300"
                       >
-                        This is the best product sellers
+                        {product.productDesc}
                       </Typography>
                     </CardOverflow>
                   </Card>
                 </CssVarsProvider>
               );
-            })}
+            })
+          ):(
+            <Box className={"data-no"}>
+            Trending products are not available!
+          </Box>
+          )}
           </Stack>
         </Stack>
       </Container>
     </div>
+          
   );
 }
