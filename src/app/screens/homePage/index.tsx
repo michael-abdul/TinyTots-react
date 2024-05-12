@@ -24,7 +24,6 @@ export default function HomePage() {
         page: 1,
         limit: 4,
         order: "createdAt",
-        productCollection: ProductCollection.TEETHERS,
       })
       .then((data) => {
         console.log("data passed here", data);

@@ -414,7 +414,6 @@
 }
 
 .products-page .products .address {
-  margin-bottom: 60px;
   height: auto;
   background: #f8f8ff;
 }
@@ -478,7 +477,7 @@
   width: 50px;
   height: auto;
   display: flex;
-  margin-right: 1150px;
+  margin-right: 1050px;
 }
 
 .products .product-category .category-main {

@@ -11,13 +11,14 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { setProducts } from "./slice";
-import { Product } from "../../../lib/types/product";
+import { Product, ProductInquiry } from "../../../lib/types/product";
 import { createSelector } from "reselect";
 import { retrieveProducts } from "./selector";
-import { useEffect } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import ProductService from "../../services/ProductService";
 import { ProductCollection } from "../../../lib/enums/product.enum";
 import { serverApi } from "../../../lib/types/config";
+import { useHistory } from "react-router-dom";
 
 
 /** REDUX SLICE & SELECTOR **/
@@ -34,19 +35,54 @@ const productsRetriever = createSelector(retrieveProducts, (products) => ({
 export default function Products() {
   const { setProducts } = actionDispatch(useDispatch());
   const { products } = useSelector(productsRetriever);
+  const [productSearch, setProductSearch] = useState<ProductInquiry>({
+    page: 1,
+    limit: 10,
+    order: "productAge",
+    search: "",
+  });
+  const [searchText, setSearchText] = useState<string>("");
+
+  const history = useHistory();
   useEffect(() => {
     const product = new ProductService();
     product
-      .getProducts({
-        page: 1,
-        limit: 10,
-        order: "createdAt",
-        productCollection: ProductCollection.TEETHERS,
-        search: "",
-      })
-      .then((data) => setProducts(data))
-      .catch((err) => console.log(err));
-  }, []);
+    .getProducts(productSearch)
+    .then((data) => setProducts(data))
+    .catch((err) => console.log(err));
+  }, [productSearch]);
+  useEffect(() => {
+    if (searchText === "") {
+      productSearch.search = "";
+      setProductSearch({ ...productSearch });
+    }
+  }, [searchText]);
+  // HEANDLER
+  const searchCollectionHandler = (collection: ProductCollection) => {
+    productSearch.page = 1;
+    productSearch.productCollection = collection;
+
+    setProductSearch({ ...productSearch });
+  };
+  const searchOrderHandler = (order: string) => {
+    productSearch.page = 1;
+    productSearch.order = order;
+    setProductSearch({ ...productSearch });
+  };
+
+  const searchProductHandler = () => {
+    productSearch.search = searchText;
+    setProductSearch({ ...productSearch });
+  };
+
+  const paginationHandler = (e: ChangeEvent<any>, value: number) => {
+    productSearch.page = value;
+    setProductSearch({ ...productSearch });
+  };
+
+  const chooseDishHandler = (id: string) => {
+    history.push(`/products/${id}`);
+  };
 
   return (
     <div className={"products"}>
@@ -60,11 +96,22 @@ export default function Products() {
                   className={"single-search-input"}
                   name={"single-resSearch"}
                   placeholder={"Search for your favorite toys"}
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter"){
+                      e.preventDefault();
+                      searchProductHandler();
+                    }
+                    
+                  }}
                 />
                 <Button
                   className={"single-button-search"}
                   variant="contained"
                   endIcon={<SearchIcon />}
+                  onClick={searchProductHandler}
+
                 >
                   Search
                 </Button>
@@ -77,23 +124,63 @@ export default function Products() {
           </Stack>
           <Stack className={"product-category"}>
             <div className={"category-main"}>
-              <Button variant={"contained"} color={"secondary"}>
+            <Button
+                variant={"contained"}
+                color={
+                  productSearch.productCollection === ProductCollection.PLAYMATS
+                    ? "primary"
+                    : "secondary"
+                }
+                onClick={() => searchCollectionHandler(ProductCollection.PLAYMATS)}
+              >
                 Baby playmats
                 <img src="/icons/preschool.svg" />
               </Button>
-              <Button variant={"contained"} color={"secondary"}>
+              <Button
+                variant={"contained"}
+                color={
+                  productSearch.productCollection === ProductCollection.TEETHERS
+                    ? "primary"
+                    : "secondary"
+                }
+                onClick={() => searchCollectionHandler(ProductCollection.TEETHERS)}
+              >
                 Baby teethers
                 <img src="/icons/teethe.svg" />
               </Button>
-              <Button variant={"contained"} color={"secondary"}>
+              <Button
+                variant={"contained"}
+                color={
+                  productSearch.productCollection === ProductCollection.LEARNING
+                    ? "primary"
+                    : "secondary"
+                }
+                onClick={() => searchCollectionHandler(ProductCollection.LEARNING)}
+              >
                 Learning toys
                 <img src="/icons/learn.svg" />
               </Button>
-              <Button variant={"contained"} color={"secondary"}>
+              <Button
+                variant={"contained"}
+                color={
+                  productSearch.productCollection === ProductCollection.SOFT_PLUSH
+                    ? "primary"
+                    : "secondary"
+                }
+                onClick={() => searchCollectionHandler(ProductCollection.SOFT_PLUSH)}
+              >
                 Soft & Plush toys
                 <img src="/icons/plush.svg" />
               </Button>
-              <Button variant={"contained"} color={"primary"}>
+              <Button
+                variant={"contained"}
+                color={
+                  productSearch.productCollection === ProductCollection.MUSIC_SOUND
+                    ? "primary"
+                    : "secondary"
+                }
+                onClick={() => searchCollectionHandler(ProductCollection.MUSIC_SOUND)}
+              >
                 Music & Sound toys
                 <img src="/icons/todler.svg" />
               </Button>
@@ -110,22 +197,37 @@ export default function Products() {
               <Box className={"dishes-filter-box"}>
                 <Button
                   variant={"contained"}
-                  color="primary"
                   className={"order"}
+                  color={
+                    productSearch.order === "createdAt"
+                      ? "primary"
+                      : "secondary"
+                  }
+                  onClick={() => searchOrderHandler("createdAt")}
                 >
                   New
                 </Button>
                 <Button
                   variant={"contained"}
-                  color="secondary"
                   className={"order"}
+                  color={
+                    productSearch.order === "productPrice"
+                      ? "primary"
+                      : "secondary"
+                  }
+                  onClick={() => searchOrderHandler("productPrice")}
                 >
                   Price
                 </Button>
                 <Button
                   variant={"contained"}
-                  color="secondary"
                   className={"order"}
+                  color={
+                    productSearch.order === "productViews"
+                      ? "primary"
+                      : "secondary"
+                  }
+                  onClick={() => searchOrderHandler("productViews")}
                 >
                   Views
                 </Button>
@@ -140,7 +242,11 @@ export default function Products() {
               products.map((product:Product) => {
                 const imagePath = `${serverApi}/${product.productImages[0]}`;
                 return (
-                  <Stack key={product._id} className={"product-card"}>
+                  <Stack
+                    key={product._id}
+                    className={"product-card"}
+                    onClick={() => chooseDishHandler(product._id)}
+                  >
                     <Stack
                       className={"product-img"}
                       sx={{ backgroundImage: `url(${imagePath})` }}
@@ -176,8 +282,12 @@ export default function Products() {
         </Stack>
         <Stack className={"pagination-section"}>
           <Pagination
-            count={3}
-            page={1}
+            count={
+              products.length !== 0
+                ? productSearch.page + 1
+                : productSearch.page
+            }
+            page={productSearch.page}
             renderItem={(item) => (
               <PaginationItem
                 components={{
@@ -188,6 +298,7 @@ export default function Products() {
                 color={"secondary"}
               />
             )}
+            onChange={paginationHandler}
           />
         </Stack>
       </Container>
@@ -248,7 +359,7 @@ export default function Products() {
       </div>
 
       <div className={"address"}>
-        <Container>
+
           <Stack
             className={"address-area"}
             sx={{ mt: "60px" }}
@@ -262,12 +373,12 @@ export default function Products() {
             <iframe
               style={{ marginTop: "60px" }}
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.363734762081!2d692267250514616!3d41.322703307863044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b9a0a33281d%3A0x9c5015eab678e435!2z0KDQsNC50YXQvtC9!5e0!3m2!1sko!2skr!4v1655461169573!5m2!1sko!skr"
-              width="1320"
-              height="500"
+              width="100%"
+              height="700"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
           </Stack>
-        </Container>
+
       </div>
     </div>
   );
