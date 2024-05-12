@@ -10,7 +10,6 @@ import { useHistory } from "react-router-dom";
 import { CartItem } from "../../../lib/types/search";
 import { serverApi } from "../../../lib/types/config";
 
-
 interface BasketProps {
   cartItems: CartItem[];
   onAdd: (item: CartItem) => void;
@@ -97,15 +96,14 @@ export default function Basket(props: BasketProps) {
               <div>Cart is empty!</div>
             ) : (
               <Stack flexDirection={"row"}>
-
-              <div>Cart Products:</div>
-              <Button  sx={{ ml: "250px", cursor: "pointer" }}
+                <div>Cart Products:</div>
+                <Button
+                  sx={{ ml: "250px", cursor: "pointer" }}
                   color="primary"
-                  onClick={() => onDeleteAll()}>
-          <img src={"/icons/trash.svg"} />
-                  </Button>
-                 
-                
+                  onClick={() => onDeleteAll()}
+                >
+                  <img src={"/icons/trash.svg"} />
+                </Button>
               </Stack>
             )}
           </Box>
@@ -115,9 +113,9 @@ export default function Basket(props: BasketProps) {
               {cartItems.map((item: CartItem) => {
                 const imagePath = `${serverApi}/${item.image}`;
                 return (
-                  <Box className={"basket-info-box"}>
+                  <Box className={"basket-info-box"} key={item._id}>
                     <div className={"cancel-btn"}>
-                    <CancelIcon
+                      <CancelIcon
                         color={"primary"}
                         onClick={() => onDelete(item)}
                       />
@@ -129,7 +127,7 @@ export default function Basket(props: BasketProps) {
                     </p>
                     <Box sx={{ minWidth: 120 }}>
                       <div className="col-2">
-                      <button
+                        <button
                           onClick={() => onRemove(item)}
                           className="remove"
                         >
@@ -146,17 +144,17 @@ export default function Basket(props: BasketProps) {
             </Box>
           </Box>
           {cartItems.length !== 0 ? (
-          <Box className={"basket-order"}>
-            <span className={"price"}>
+            <Box className={"basket-order"}>
+              <span className={"price"}>
                 Total: ${totalPrice} ({itemsPrice} + {shippingCost})
               </span>
-            <Button startIcon={<ShoppingCartIcon />} variant={"contained"}>
-              Order
-            </Button>
-          </Box>
-            ) : (
-              ""
-            )}
+              <Button startIcon={<ShoppingCartIcon />} variant={"contained"}>
+                Order
+              </Button>
+            </Box>
+          ) : (
+            ""
+          )}
         </Stack>
       </Menu>
     </Box>
