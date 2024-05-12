@@ -19,7 +19,7 @@ import ProductService from "../../services/ProductService";
 import { ProductCollection } from "../../../lib/enums/product.enum";
 import { serverApi } from "../../../lib/types/config";
 import { useHistory } from "react-router-dom";
-
+import { CartItem } from "../../../lib/types/search";
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -30,9 +30,12 @@ const productsRetriever = createSelector(retrieveProducts, (products) => ({
   products,
 }));
 
+interface ProductsProps {
+  onAdd: (item: CartItem) => void;
+}
 
-
-export default function Products() {
+export default function Products(props: ProductsProps) {
+  const { onAdd } = props;
   const { setProducts } = actionDispatch(useDispatch());
   const { products } = useSelector(productsRetriever);
   const [productSearch, setProductSearch] = useState<ProductInquiry>({
@@ -47,9 +50,9 @@ export default function Products() {
   useEffect(() => {
     const product = new ProductService();
     product
-    .getProducts(productSearch)
-    .then((data) => setProducts(data))
-    .catch((err) => console.log(err));
+      .getProducts(productSearch)
+      .then((data) => setProducts(data))
+      .catch((err) => console.log(err));
   }, [productSearch]);
   useEffect(() => {
     if (searchText === "") {
@@ -99,11 +102,10 @@ export default function Products() {
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
                   onKeyDown={(e) => {
-                    if (e.key === "Enter"){
+                    if (e.key === "Enter") {
                       e.preventDefault();
                       searchProductHandler();
                     }
-                    
                   }}
                 />
                 <Button
@@ -111,7 +113,6 @@ export default function Products() {
                   variant="contained"
                   endIcon={<SearchIcon />}
                   onClick={searchProductHandler}
-
                 >
                   Search
                 </Button>
@@ -124,14 +125,16 @@ export default function Products() {
           </Stack>
           <Stack className={"product-category"}>
             <div className={"category-main"}>
-            <Button
+              <Button
                 variant={"contained"}
                 color={
                   productSearch.productCollection === ProductCollection.PLAYMATS
                     ? "primary"
                     : "secondary"
                 }
-                onClick={() => searchCollectionHandler(ProductCollection.PLAYMATS)}
+                onClick={() =>
+                  searchCollectionHandler(ProductCollection.PLAYMATS)
+                }
               >
                 Baby playmats
                 <img src="/icons/preschool.svg" />
@@ -143,7 +146,9 @@ export default function Products() {
                     ? "primary"
                     : "secondary"
                 }
-                onClick={() => searchCollectionHandler(ProductCollection.TEETHERS)}
+                onClick={() =>
+                  searchCollectionHandler(ProductCollection.TEETHERS)
+                }
               >
                 Baby teethers
                 <img src="/icons/teethe.svg" />
@@ -155,7 +160,9 @@ export default function Products() {
                     ? "primary"
                     : "secondary"
                 }
-                onClick={() => searchCollectionHandler(ProductCollection.LEARNING)}
+                onClick={() =>
+                  searchCollectionHandler(ProductCollection.LEARNING)
+                }
               >
                 Learning toys
                 <img src="/icons/learn.svg" />
@@ -163,11 +170,14 @@ export default function Products() {
               <Button
                 variant={"contained"}
                 color={
-                  productSearch.productCollection === ProductCollection.SOFT_PLUSH
+                  productSearch.productCollection ===
+                  ProductCollection.SOFT_PLUSH
                     ? "primary"
                     : "secondary"
                 }
-                onClick={() => searchCollectionHandler(ProductCollection.SOFT_PLUSH)}
+                onClick={() =>
+                  searchCollectionHandler(ProductCollection.SOFT_PLUSH)
+                }
               >
                 Soft & Plush toys
                 <img src="/icons/plush.svg" />
@@ -175,11 +185,14 @@ export default function Products() {
               <Button
                 variant={"contained"}
                 color={
-                  productSearch.productCollection === ProductCollection.MUSIC_SOUND
+                  productSearch.productCollection ===
+                  ProductCollection.MUSIC_SOUND
                     ? "primary"
                     : "secondary"
                 }
-                onClick={() => searchCollectionHandler(ProductCollection.MUSIC_SOUND)}
+                onClick={() =>
+                  searchCollectionHandler(ProductCollection.MUSIC_SOUND)
+                }
               >
                 Music & Sound toys
                 <img src="/icons/todler.svg" />
@@ -239,7 +252,7 @@ export default function Products() {
         <Stack className={"list-category-section"}>
           <Stack className={"product-wrapper"}>
             {products.length !== 0 ? (
-              products.map((product:Product) => {
+              products.map((product: Product) => {
                 const imagePath = `${serverApi}/${product.productImages[0]}`;
                 return (
                   <Stack
@@ -252,9 +265,15 @@ export default function Products() {
                       sx={{ backgroundImage: `url(${imagePath})` }}
                     >
                       <Button className={"view-btn"} sx={{ right: "5px" }}>
-                        <Badge badgeContent={product.productViews} color="secondary">
+                        <Badge
+                          badgeContent={product.productViews}
+                          color="secondary"
+                        >
                           <RemoveRedEyeIcon
-                            sx={{ color: product.productViews === 0? "gray" : "white" }}
+                            sx={{
+                              color:
+                                product.productViews === 0 ? "gray" : "white",
+                            }}
                           />
                         </Badge>
                       </Button>
@@ -268,7 +287,19 @@ export default function Products() {
                         <MonetizationOnIcon />
                         {product.productPrice}
                       </div>
-                      <Button className={"shop-btn"}>
+                      <Button
+                        className={"shop-btn"}
+                        onClick={(e) => {
+                          onAdd({
+                            _id: product._id,
+                            quantity: 1,
+                            name: product.productName,
+                            price: product.productPrice,
+                            image: product.productImages[0],
+                          });
+                          e.stopPropagation();
+                        }}
+                      >
                         <div style={{ display: "flex" }}> Add to cart</div>
                       </Button>
                     </Box>
@@ -359,26 +390,24 @@ export default function Products() {
       </div>
 
       <div className={"address"}>
-
-          <Stack
-            className={"address-area"}
-            sx={{ mt: "60px" }}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Box className={"title"}>Our address</Box>
-            <iframe
-              style={{ marginTop: "60px" }}
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.363734762081!2d692267250514616!3d41.322703307863044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b9a0a33281d%3A0x9c5015eab678e435!2z0KDQsNC50YXQvtC9!5e0!3m2!1sko!2skr!4v1655461169573!5m2!1sko!skr"
-              width="100%"
-              height="700"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </Stack>
-
+        <Stack
+          className={"address-area"}
+          sx={{ mt: "60px" }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Box className={"title"}>Our address</Box>
+          <iframe
+            style={{ marginTop: "60px" }}
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.363734762081!2d692267250514616!3d41.322703307863044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b9a0a33281d%3A0x9c5015eab678e435!2z0KDQsNC50YXQvtC9!5e0!3m2!1sko!2skr!4v1655461169573!5m2!1sko!skr"
+            width="100%"
+            height="700"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </Stack>
       </div>
     </div>
   );
