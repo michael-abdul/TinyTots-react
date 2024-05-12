@@ -10,24 +10,26 @@ import './css/index.css';
 import theme from './app/MaterialTheme';
 import {
   BrowserRouter as Router} from "react-router-dom";
+import ContextProvider from './app/context/ContextProvider';
     const container = document.getElementById('root')!;
     const root = createRoot(container);
 
 
 
-root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Router>
-      <App />
-      </Router>
-      </ThemeProvider>
-    </Provider>
-  </React.StrictMode>,
-  
-);
+    root.render(
+      <React.StrictMode>
+        <Provider store={store}>
+          <ContextProvider>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <Router>
+                <App />
+              </Router>
+            </ThemeProvider>
+          </ContextProvider>
+        </Provider>
+      </React.StrictMode>
+    );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
