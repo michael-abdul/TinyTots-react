@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 import ProductService from "../../services/ProductService";
 import { ProductCollection } from "../../../lib/enums/product.enum";
 import "../../../css/home.css";
+import "../../../css/swiper.css";
+
 import { Dispatch } from "@reduxjs/toolkit";
 import { Product } from "../../../lib/types/product";
 import { setTrendingProducts } from "./slice";

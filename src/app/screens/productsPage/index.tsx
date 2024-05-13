@@ -3,8 +3,11 @@ import { Container } from "@mui/material";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import ChosenProduct from "./ChosenProduct";
 import "../../../css/products.css";
+import "../../../css/swiper.css"
+
 import Products from "./Products";
 import { CartItem } from "../../../lib/types/search";
+import MySwiperComponent from "./Event";
 
 interface ProductsPageProps {
   onAdd: (item: CartItem) => void;
@@ -22,9 +25,14 @@ export default function ProductsPage(props: ProductsPageProps) {
           <ChosenProduct onAdd={onAdd} />
         </Route>
         <Route path={`${products.path}`}>
+        <MySwiperComponent/>
+
           <Products onAdd={onAdd} />
         </Route>
+
       </Switch>
+
+
     </div>
   );
 }
