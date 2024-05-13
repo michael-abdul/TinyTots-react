@@ -50,7 +50,7 @@
 /* TRENDING PRODUCTS */
 
 .homepage .popular-dishes-frame {
-  width: 900px;
+  width: 1100px;
   height: 580px;
   display: flex;
   background: #f8f8f8;
@@ -76,12 +76,12 @@
   margin-top: 43px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+
 }
 
 .homepage .popular-dishes-frame .cards-frame .card {
   min-height: 300px;
-  min-width: 400px;
+  min-width: 370px;
   margin-right: 5px;
   margin-left: 50px;
   cursor: pointer;
