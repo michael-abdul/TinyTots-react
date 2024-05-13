@@ -160,7 +160,7 @@
   flex-wrap: wrap;
 }
 
-.products .product-wrapper .data-no{
+.products .list-category-section .data{
   width: 100%;
   display: flex;
   justify-content: center;
@@ -171,7 +171,7 @@
   font-weight: 400;
   font-size: 30px;
   line-height: 34px;
-  color: #e3c08d;
+  color: #ff1919;
 }
 
 .products-page .products .product-card {

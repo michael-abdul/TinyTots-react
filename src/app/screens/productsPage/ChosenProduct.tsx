@@ -5,10 +5,6 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import Divider from "../../components/divider";
 import Button from "@mui/material/Button";
 import Rating from "@mui/material/Rating";
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +18,10 @@ import MemberService from "../../services/MemberService";
 import { Member } from "../../../lib/types/member";
 import { serverApi } from "../../../lib/types/config";
 import { CartItem } from "../../../lib/types/search";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({

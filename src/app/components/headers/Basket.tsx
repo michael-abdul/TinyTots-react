@@ -22,7 +22,7 @@ interface BasketProps {
 
 export default function Basket(props: BasketProps) {
   const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
-  const { authMember } = useGlobals();
+  const { authMember, setOrderBuilder } = useGlobals();
 
   const history = useHistory();
 
@@ -31,7 +31,7 @@ export default function Basket(props: BasketProps) {
     0
   );
   const shippingCost: number = itemsPrice < 100 ? 5 : 0;
-  const totalPrice = (itemsPrice + shippingCost).toFixed(2);
+  const totalPrice = (itemsPrice + shippingCost).toFixed(1);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -44,7 +44,6 @@ export default function Basket(props: BasketProps) {
     setAnchorEl(null);
   };
 
-
   const proceedOrderHandler = async () => {
     try {
       handleClose();
@@ -55,6 +54,7 @@ export default function Basket(props: BasketProps) {
 
       onDeleteAll();
       // REFRESH VIA CONTEXT
+      setOrderBuilder(new Date());
       history.push("/orders");
     } catch (err) {
       console.log(err);

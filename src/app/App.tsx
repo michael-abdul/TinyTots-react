@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Link, Route, Switch, useLocation } from "react-router-dom";
+import {  Route, Switch, useLocation } from "react-router-dom";
 import HomePage from "./screens/homePage";
 import ProductsPage from "./screens/productsPage";
 import OrdersPage from "./screens/ordersPage";
@@ -9,15 +9,15 @@ import HelpPage from "./screens/helpPage";
 import OtherNavbar from "./components/headers/OtherNavbar";
 import HomeNavbar from "./components/headers/HomeNavbar";
 import Footer from "./components/footer";
-import "../css/app.css";
-import "../css/navbar.css";
-import "../css/footer.css";
 import useBasket from "./hooks/useBasket";
 import AuthenticationModal from "./components/auth";
 import { sweetErrorHandling, sweetTopSuccessAlert } from "../lib/sweetAlert";
 import MemberService from "./services/MemberService";
 import { useGlobals } from "./hooks/useGlobals";
 import { Messages } from "../lib/types/config";
+import "../css/app.css";
+import "../css/navbar.css";
+import "../css/footer.css";
 
 function App() {
   const location = useLocation();

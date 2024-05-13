@@ -201,10 +201,10 @@ export default function Products(props: ProductsProps) {
           </Stack>
           <Stack>
             <Stack
-              // display={"flex"}
-              // flexDirection={"row"}
-              // justifyContent={"flex-start"}
-              // width={"250%"}
+              display={"flex"}
+              flexDirection={"row"}
+              justifyContent={"flex-start"}
+              width={"250%"}
               sx={{ mt: "65px", mr: "900px" }}
             >
               <Box className={"dishes-filter-box"}>
@@ -307,7 +307,7 @@ export default function Products(props: ProductsProps) {
                 );
               })
             ) : (
-              <Box className="no-data">Products are not available!</Box>
+              <Box className="data">Products are not available!</Box>
             )}
           </Stack>
         </Stack>
