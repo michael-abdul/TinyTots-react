@@ -41,7 +41,7 @@ export default function Products(props: ProductsProps) {
   const [productSearch, setProductSearch] = useState<ProductInquiry>({
     page: 1,
     limit: 10,
-    order: "productAge",
+    order: "createdAt",
     search: "",
   });
   const [searchText, setSearchText] = useState<string>("");
@@ -61,7 +61,7 @@ export default function Products(props: ProductsProps) {
     }
   }, [searchText]);
   // HEANDLER
-  const searchCollectionHandler = (collection: ProductCollection) => {
+  const searchCollectionHandler = (collection: ProductCollection | undefined) => {
     productSearch.page = 1;
     productSearch.productCollection = collection;
 
@@ -125,6 +125,15 @@ export default function Products(props: ProductsProps) {
           </Stack>
           <Stack className={"product-category"}>
             <div className={"category-main"}>
+                
+            <Button
+            variant={"contained"}
+            onClick={() => searchCollectionHandler(undefined)}
+          >
+            Search All 
+                <img src="/icons/all.svg" />
+              </Button>
+
               <Button
                 variant={"contained"}
                 color={

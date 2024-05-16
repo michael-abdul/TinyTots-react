@@ -70,7 +70,6 @@
 
 .products-page .products .single-search-input {
   position: relative;
-  margin-top: 50px;
   width: 550px;
   height: 64px;
   padding: 0px 8px;
@@ -89,7 +88,6 @@
 
 .products-page .products .single-button-search {
   position: relative;
-  margin-top: 50px;
   cursor: pointer;
   width: 159px;
   height: 64px;

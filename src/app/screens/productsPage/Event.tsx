@@ -10,6 +10,7 @@ const MySwiperComponent: React.FC = () => {
         el: '.swiper-pagination',
         clickable: true,
       },
+      spaceBetween: -20,
       loop: true,
       centeredSlides: true,
       slidesPerView: 'auto',
@@ -21,6 +22,7 @@ const MySwiperComponent: React.FC = () => {
         depth: 150,
         modifier: 1.5,
         slideShadows: false,
+        
       },
       autoplay: {
         delay: 2000, // Autoplay delay in milliseconds
@@ -41,27 +43,27 @@ const MySwiperComponent: React.FC = () => {
       <div className="swiper-wrapper">
         <div className="swiper-slide">
           <div className="slider-image" >
-            <img src="/img/sales1.jpg" alt="slide 1" />
+            <img src="/img/sales1.jpg" alt="slide 1" style={{height:200, width:300, borderRadius:24}} />
           </div>
         </div>
         <div className="swiper-slide">
           <div className="slider-image">
-            <img src="/img/sale.jpg" alt="slide 2" />
+            <img src="/img/sale.jpg" alt="slide 2" style={{height:200, width:300,borderRadius:24}}/>
           </div>
         </div>
         <div className="swiper-slide">
           <div className="slider-image">
-            <img src="/img/sale1.jpg" alt="slide 3" />
+            <img src="/img/sale1.jpg" alt="slide 3"style={{height:200, width:300,borderRadius:24}} />
           </div>
         </div>
         <div className="swiper-slide">
           <div className="slider-image">
-            <img src="/img/sale2.jpg" alt="slide 4" />
+            <img src="/img/sale2.jpg" alt="slide 4" style={{height:200, width:300,borderRadius:24}}/>
           </div>
         </div>
         <div className="swiper-slide">
           <div className="slider-image">
-            <img src="/img/sales.jpg" alt="slide 5" />
+            <img src="/img/sales.jpg" alt="slide 5" style={{height:200, width:300,borderRadius:24}}/>
           </div>
         </div>
       </div>
