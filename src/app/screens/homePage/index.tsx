@@ -23,8 +23,8 @@ export default function HomePage() {
     product
       .getProducts({
         page: 1,
-        limit: 4,
-        order: "createdAt",
+        limit: 5,
+        order: "productViews",
       })
       .then((data) => {
         console.log("data passed here", data);

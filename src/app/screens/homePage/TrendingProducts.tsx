@@ -49,7 +49,7 @@ export default function TrendingProducts() {
                         <Typography
                           level="h2"
                           fontSize="lg"
-                          textColor="#fff"
+                          textColor="#f8f8f8"
                           mb={1}
                         >
                           {product.productName}
@@ -57,7 +57,7 @@ export default function TrendingProducts() {
                         <Typography
                           sx={{
                             fontWeight: "md",
-                            color: "neutral.300",
+                            color: "#f8f8f8",
                             alignItems: "center",
                             display: "flex",
                           }}
@@ -81,7 +81,7 @@ export default function TrendingProducts() {
                     >
                       <Typography
                         startDecorator={<DescriptionOutlinedIcon />}
-                        textColor="neutral. 300"
+                        textColor="#f8f8f8"
                       >
                         {product.productDesc}
                       </Typography>
