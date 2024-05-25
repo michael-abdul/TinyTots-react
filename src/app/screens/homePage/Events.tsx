@@ -10,8 +10,9 @@ export default function Events() {
     <div className={"events-frame"}>
       <Stack className={"events-main"}>
         <Box className={"events-text"}>
-          <span className={"category-title"}>Featured creators of the month
-</span>
+          <span className={"category-title"}>
+            Featured creators of the month
+          </span>
         </Box>
 
         <Swiper
@@ -52,11 +53,14 @@ export default function Events() {
                       <p className={"text-desc"}> {value.desc} </p>
 
                       <div className={"bott-info"}>
-                        <div className={"bott-info-main"}>
+                        <div className={"bott-info-main"} style={{ width: "10%", height: "100" }}>
                           <img src={"/icons/calendar.svg"} />
                           {value.date}
                         </div>
-                        <div className={"bott-info-main"}>
+                        <div
+                          className={"bott-info-main"}
+                          style={{ width: "10%", height: "100" }}
+                        >
                           <img src={"/icons/location.svg"} />
                           {value.location}
                         </div>
@@ -69,16 +73,9 @@ export default function Events() {
           })}
         </Swiper>
         <Box className={"prev-next-frame"}>
-          <img
-            src={"/icons/arrow-right.svg"}
-            className={"swiper-button-prev"}
-          />
+          <img className={"swiper-button-prev"} />
           <div className={"dot-frame-pagination swiper-pagination"}></div>
-          <img
-            src={"/icons/arrow-right.svg"}
-            className={"swiper-button-next"}
-            style={{ transform: "rotate(-180deg)" }}
-          />
+          <img className={"swiper-button-next"} />
         </Box>
       </Stack>
     </div>

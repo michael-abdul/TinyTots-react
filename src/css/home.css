@@ -245,6 +245,7 @@
 
 .homepage .events-frame .events-desc .events-bott {
   width: 97%;
+  margin-bottom: 50px;
   height: auto;
   display: flex;
   flex-direction: row;
@@ -303,6 +304,7 @@
 
 .homepage .events-frame .bott-info .bott-info-main {
   margin-left: 10px;
+  padding-right: 65px;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -311,7 +313,7 @@
   font-family: "GT Walsheim Pro";
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 16px;
   color: #4f547b;
 }
@@ -325,18 +327,4 @@
   flex-direction: row;
 }
 
-.homepage .events-frame .swiper-pagination-bullet {
-  margin-right: 5px;
-  width: 8px;
-  height: 8px;
-  text-align: center;
-  opacity: 1;
-  background: #f8f8ff;
-  border-radius: 50%;
-}
-
-.homepage .events-frame .swiper-pagination-bullet-active {
-  background: #343434;
-  border-radius: 50%;
-}
 

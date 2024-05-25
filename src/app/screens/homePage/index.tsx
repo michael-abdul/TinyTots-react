@@ -5,7 +5,6 @@ import Advertisement from "./Advertisement";
 import Events from "./Events";
 import { useDispatch } from "react-redux";
 import ProductService from "../../services/ProductService";
-import { ProductCollection } from "../../../lib/enums/product.enum";
 import "../../../css/home.css";
 import "../../../css/swiper.css";
 
